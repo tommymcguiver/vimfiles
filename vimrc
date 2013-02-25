@@ -308,3 +308,4 @@ autocmd BufReadPost fugitive://*
 
 let g:solarized_termcolors=256
 colorscheme solarized
+let g:neocomplcache_enable_at_startup = 1

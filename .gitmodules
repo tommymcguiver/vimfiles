@@ -103,3 +103,6 @@
 [submodule "bundle/vim-perl"]
 	path = bundle/vim-perl
 	url = https://github.com/vim-perl/vim-perl.git
+[submodule "bundle/zencoding"]
+	path = bundle/zencoding
+	url = https://github.com/mattn/zencoding-vim.git

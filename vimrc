@@ -309,7 +309,7 @@ autocmd BufReadPost fugitive://*
 let g:solarized_termcolors=256
 colorscheme solarized
 
-autocmd filetype *commit* let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_at_startup = 1
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1

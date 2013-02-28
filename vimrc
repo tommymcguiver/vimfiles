@@ -36,8 +36,8 @@ endif
 
 "default indent settings
 set shiftwidth=4
-set softtabstop=4
-set expandtab
+set tabstop=4
+set smarttab
 set autoindent
 
 "folding settings
@@ -307,14 +307,26 @@ autocmd BufReadPost fugitive://*
   \ endif
 
 let g:solarized_termcolors=256
+syntax enable;
+set background=light
 colorscheme solarized
 
 let g:neocomplcache_enable_at_startup = 1
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 nnoremap <f4> :CtrlP<cr>
+
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set fillchars+=stl:\ ,stlnc:\:
+set guifont=Inconsolata-dz\ for\ Powerline
+let g:UltiSnipsListSnippets="<a-space>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+"Bug with yank ring.
+let g:yankring_manual_clipboard_check=0

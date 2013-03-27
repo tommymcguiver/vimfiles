@@ -35,10 +35,7 @@ if v:version >= 703
 endif
 
 "default indent settings
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-set autoindent
+set noet ci pi sts=0 sw=4 ts=4 sta ai
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -309,12 +306,9 @@ autocmd BufReadPost fugitive://*
 let g:solarized_termcolors=256
 colorscheme solarized
 
-let g:neocomplcache_enable_at_startup = 1
-let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
 nnoremap <f4> :CtrlP<cr>
+
+let g:UltiSnipsListSnippets="<a-space>"
+
+let g:neocomplcache_enable_at_startup = 1
+let g:yankring_manual_clipboard_check = 1

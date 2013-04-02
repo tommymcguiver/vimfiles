@@ -35,10 +35,7 @@ if v:version >= 703
 endif
 
 "default indent settings
-set shiftwidth=4
-set tabstop=4
-set smarttab
-set autoindent
+set noet ci pi sts=0 sw=4 ts=4 sta ai
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -311,13 +308,6 @@ syntax enable;
 set background=light
 colorscheme solarized
 
-let g:neocomplcache_enable_at_startup = 1
-let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
 nnoremap <f4> :CtrlP<cr>
 
 let g:Powerline_symbols = 'fancy'
@@ -330,3 +320,4 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "Bug with yank ring.
 let g:yankring_manual_clipboard_check=0
+let g:neocomplcache_enable_at_startup = 1

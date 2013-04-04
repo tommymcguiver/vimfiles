@@ -5,8 +5,9 @@
 	ui = true
 [core]
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab
-	editor = /usr/bin/vim
 [diff]
+	tool = vimdiff
+[merge]
 	tool = vimdiff
 [alias]
 	#######Shorten stuff
@@ -83,6 +84,8 @@
 	upstream = rev-parse --symbolic-full-name --abbrev-ref HEAD@{upstream}
 
 	authors = !"git l --format='%aN <%aE>' HEAD | sort -u"
+
+	alias = !"git config --list | grep alias"
 [grep]
 	#Make git grep play nice
 	extendRegexp = true

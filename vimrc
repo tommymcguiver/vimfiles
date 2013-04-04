@@ -318,6 +318,10 @@ let g:UltiSnipsListSnippets="<a-space>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-"Bug with yank ring.
-let g:yankring_manual_clipboard_check=0
 let g:neocomplcache_enable_at_startup = 1
+let g:yankring_manual_clipboard_check = 1
+
+if version < 710
+	let did_UltiSnips_vim=1
+	let did_UltiSnips_vim_after=1
+endif

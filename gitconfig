@@ -9,16 +9,84 @@
 [diff]
 	tool = vimdiff
 [alias]
+	#######Shorten stuff
 	co = checkout
 	br = branch
 	st = status
 	stat = status
+	#######Do some cool stuff
+	#Typo
+	amend = commit ---ammend
+	ammend = amend
 	ss = status -sb -uno
 	ssu = status -sb -unormal
-	ll = log --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(blue)%s%C(reset) %C(bold black)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
-	lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(blue)%s%C(reset) %C(bold black)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
-	lg2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'          %C(blue)%s%C(reset) %C(bold black)— %an%C(reset)' --abbrev-commit
+
+	#Sort refs perty like¬
+	sortrefs = for-each-ref --sort='-committerdate'
+	sortrefsp = for-each-ref --sort='-committerdate' --format='%(refname:short)  (%(authordate))'
+
+	#What needs to be cleaned up?
+	gerritcleanup = "!for i in $( git for-each-ref --format='%(refname)' refs/heads/OZLAU* ); do echo \"branch: $i\"; git --no-pager log classic..$i | git shortlog; done"
+	gerritcleanup1 = "!for i in $( git for-each-ref --format='%(refname)' refs/heads/OZLAU* ); do echo \"branch: $i\"; git ll classic..$i ; done"
+
+	#branches sorted by time of last commit
+	brage = "!f() { git for-each-ref --sort=committerdate refs/heads $1  --format=\"%(refname:short)\" ; }; g() { for C in $(f $1) ; do git show -s --pretty=format:\"%Cgreen%ci %Cblue%cr%Creset  $C\" \"$C\" -- ; done; }; g ""}"
+	brageall = !git brage refs/remotes
+	#Advanced branch list.
+	tbr = branch -tavv
+	rbr = ls-remote --heads
+	#What topic branches can i delete?
+	merged = branch --merged
+
+	#File listings
+	ls-ignored = ls-files --exclude-standard --ignored --others
+
+	#logs
+	l = log --no-merges
+	lc = log ORIG_HEAD.. --stat --no-merges
+	ll = log --pretty=nice --abbrev-commit --date=relative
+	lg1 = log --graph --all  --pretty=nice --abbrev-commit --date=relative
+	lg2 = log --graph --all --abbrev-commit --pretty=longnice
 	lg = !"git lg1"
+	lself = !git l --author=kenm
+	slog = !git log ...classic | git shortlog
+
+	#more logs
+	rawlog = log --format=\"format:commit %H%nAuthor:%an%n%n%B%n\"
+	justpushed = log origin/classic@{\"1 days ago\"}..origin/classic
+
+	#Find bugs
+	findbug = "!sh -c 'git log --grep='^[[:space:]]*OZLAU[-_]$1'' -"
+	bugrelease = "!sh -c 'git name-rev --tags --name-only  $(git log --grep='^[[:space:]]*OZLAU[-_]$1' --pretty=\"format:%H\n\")' -"
+	#reflog
+	rlog = reflog --date=relative
 	hotfixes = !"git ll master..HEAD"
 	missing = !"git ll HEAD..master"
 	wtf = !"echo \"$(tput setaf 1)hotfixes$(tput sgr0):\" ;git --no-pager hotfixes ; echo ''; echo \"$(tput setaf 1)missing$(tput sgr0):\" ; git --no-pager missing; echo '' "
+
+	######GREP STUFF
+	#grep with special stuff
+	g = grep --break --heading --line-number
+	#search index
+	gi = !git g --cached
+	gdi = diff-index --cached
+	glf = log -G
+	gl = "!sh -c 'git log --grep='$1' --format=nice $2' -"
+	gl1 = "!sh -c 'git log --grep='$1' --oneline $2' -"
+
+	#What branch contains a following sha1.
+	contains = branch --contains
+	this = rev-parse --abbrev-ref HEAD
+	cloneurl = config --get remote.origin.url
+
+	#What is the upstream branch?
+	upstream = rev-parse --symbolic-full-name --abbrev-ref HEAD@{upstream}
+
+	authors = !"git l --format='%aN <%aE>' HEAD | sort -u"
+[grep]
+	#Make git grep play nice
+	extendRegexp = true
+	lineNumber = true
+[pretty]
+	nice = format:%C(blue)%h %C(green)(%ar) %C(bold black)%an - %C(reset)%s%C(yellow)%+d%C(reset)
+	longnice = format:%C(blue)%h %C(cyan)%ad %C(green)%ar %C(bold black)%an%C(reset)%C(yellow)%+d%n%C(reset)%s

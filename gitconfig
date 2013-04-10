@@ -17,7 +17,7 @@
 	stat = status
 	#######Do some cool stuff
 	#Typo
-	amend = commit ---ammend
+	amend = commit --amend
 	ammend = amend
 	ss = status -sb -uno
 	ssu = status -sb -unormal
@@ -86,6 +86,10 @@
 	authors = !"git l --format='%aN <%aE>' HEAD | sort -u"
 
 	alias = !"git config --list | grep alias"
+
+	#Show stash
+	lstash = !"for i in $(git --no-pager stash list --format=\"%gd\"); do echo \"List stash: $i\"; git stash show $i; done"
+	sstash = !"for i in $(git --no-pager stash list --format=\"%gd\"); do echo \"List stash: $i\"; git --no-pager stash show -p $i; done"
 [grep]
 	#Make git grep play nice
 	extendRegexp = true

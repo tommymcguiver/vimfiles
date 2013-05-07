@@ -290,7 +290,7 @@ function! SetCursorPosition()
 endfunction
 
 "spell check when writing commit logs
-autocmd filetype svn,*commit* setlocal spell
+autocmd filetype svn,*commit*,php,perl,c,c++ setlocal spell
 
 "http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
 "hacks from above (the url, not jesus) to delete fugitive buffers when we
@@ -313,7 +313,6 @@ nnoremap <f4> :CtrlP<cr>
 let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\:
-set guifont=Inconsolata-dz\ for\ Powerline
 let g:UltiSnipsListSnippets="<a-space>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -324,4 +323,30 @@ let g:yankring_manual_clipboard_check = 1
 if version < 710
 	let did_UltiSnips_vim=1
 	let did_UltiSnips_vim_after=1
+endif
+
+" Make Vim recognize xterm escape sequences for Page and Arrow
+" keys combined with modifiers such as Shift, Control, and Alt.
+" See http://www.reddit.com/r/vim/comments/1a29vk/_/c8tze8p
+if &term =~ '^screen'
+  " Page keys http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
+  execute "set t_kP=\e[5;*~"
+  execute "set t_kN=\e[6;*~"
+
+  " Arrow keys http://unix.stackexchange.com/a/34723
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
+
+"If tmux then s
+if $TERM =~ 'xterm' || $TERM =~ '256'
+	set term=screen-256color
+endif
+
+if $IS_MAC =~ 'yes'
+	set guifont=Monaco
+else
+	set guifont=Inconsolata-dz\ for\ Powerline
 endif

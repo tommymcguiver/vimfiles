@@ -5,7 +5,7 @@ if [ -d $HOME/bin ]; then
 	export PATH=$HOME/bin:$PATH
 fi
 
-IS_MAC="$( if uname -a | grep -qi darwin; then echo 'yes'; else echo 'no'; fi)"
+export IS_MAC="$( if uname -a | grep -qi darwin; then echo 'yes'; else echo 'no'; fi)"
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -26,8 +26,26 @@ set -o vi
 export PAGER="less"
 
 if [ "${IS_MAC}" = "yes" ]; then
-	eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+
+	#if cpanm installed then source.
+	if [ -d ${HOME}/perl5/lib/perl5 ]; then
+		eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+	fi
+
+	#ruby envirnoment manager.
+	if [ -x ${HOME}/.rvm/scripts/rvm ]; then
+		source ${HOME}/.rvm/scripts/rvm
+		PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+	fi
+
+	#Usefull alias's
 	alias ls="ls -G";
+	export LC_ALL="en_AU.UTF-8"
 else
-	export TERM=screen-256color
+
+	#if term is not 256 colors then force it god damn it! This is 2013
+	if !echo $TERM | grep -q 256; then
+		export TERM=screen-256color
+	fi
 fi
+

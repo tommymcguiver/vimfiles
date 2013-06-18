@@ -38,8 +38,13 @@ if [ "${IS_MAC}" = "yes" ]; then
 		PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 	fi
 
+	if which -s rbenv; then
+		eval "$(rbenv init -)"
+	fi
+
 	#Usefull alias's
-	alias ls="ls -G";
+	#Color and fancy symols at end of file so i know what they are.
+	alias ls="ls -G -F";
 	export LC_ALL="en_AU.UTF-8"
 else
 
@@ -49,3 +54,6 @@ else
 	fi
 fi
 
+alias opentcp="lsof -i TCP -c"
+alias opentcpuser="lsof -u $(whoami) -a -i TCP"
+alias ymd="date +'%Y-%m-%d %H:%M:%S'"

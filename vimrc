@@ -26,6 +26,8 @@ set hlsearch    "hilight searches by default
 set wrap        "dont wrap lines
 set linebreak   "wrap lines at convenient points
 
+set pastetoggle=<F10>
+
 if v:version >= 703
     "undo settings
     set undodir=~/.vim/undofiles

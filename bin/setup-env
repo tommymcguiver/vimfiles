@@ -1,0 +1,18 @@
+#!/bin/bash
+
+FILEDIR=$( cd $( dirname $0 )/..; pwd );
+
+if [ ! -L "${HOME}/.vim" ]; then
+	echo "ERROR: Need to delete ${HOME}/.vim dir first. i.e rm -rf ${HOME}/.vim";
+	exit 1;
+fi
+
+rm ${HOME}/.vim
+ln -s $FILEDIR ${HOME}/.vim 
+
+FILES="bashrc inputrc psqlrc vimrc tmux.conf gitconfig"
+
+for i in $FILES; do 
+	rm -f ${HOME}/.$i
+	ln -s ${HOME}/.vim/$i ${HOME}/.$i;
+done

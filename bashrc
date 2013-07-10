@@ -25,26 +25,33 @@ alias tmux="tmux -u2"
 set -o vi
 export PAGER="less"
 
+if which -s node ; then
+	alias node='env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node'
+fi
+
+#if cpanm installed then source.
+if [ -d ${HOME}/perl5/lib/perl5 ]; then
+	eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+fi
+
+#ruby envirnoment manager.
+if [ -x ${HOME}/.rvm/scripts/rvm ]; then
+	source ${HOME}/.rvm/scripts/rvm
+	PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+fi
+
+#Color and fancy symols at end of file so i know what they are.
+alias ls="ls -G -F";
+alias opentcp="lsof -i TCP -c"
+alias opentcpuser="lsof -u $(whoami) -a -i TCP"
+alias ymd="date +'%Y-%m-%d %H:%M:%S'"
+
+if which -s rbenv; then
+	eval "$(rbenv init -)"
+fi
+
 if [ "${IS_MAC}" = "yes" ]; then
-
-	#if cpanm installed then source.
-	if [ -d ${HOME}/perl5/lib/perl5 ]; then
-		eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
-	fi
-
-	#ruby envirnoment manager.
-	if [ -x ${HOME}/.rvm/scripts/rvm ]; then
-		source ${HOME}/.rvm/scripts/rvm
-		PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-	fi
-
-	if which -s rbenv; then
-		eval "$(rbenv init -)"
-	fi
-
 	#Usefull alias's
-	#Color and fancy symols at end of file so i know what they are.
-	alias ls="ls -G -F";
 	export LC_ALL="en_AU.UTF-8"
 else
 
@@ -53,7 +60,3 @@ else
 		export TERM=screen-256color
 	fi
 fi
-
-alias opentcp="lsof -i TCP -c"
-alias opentcpuser="lsof -u $(whoami) -a -i TCP"
-alias ymd="date +'%Y-%m-%d %H:%M:%S'"

@@ -25,7 +25,8 @@ alias tmux="tmux -u2"
 set -o vi
 export PAGER="less"
 
-if which -s node ; then
+#Adds readline functionality to node REPL
+if which -s node && which -s rlwrap; then
 	alias node='env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node'
 fi
 

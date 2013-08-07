@@ -2,8 +2,12 @@
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
+runtime bundle/pathogen/autoload/pathogen.vim
+execute pathogen#infect()
 "activate pathogen
-call pathogen#infect()
+filetype off
+syntax on
+filetype plugin indent on
 
 "allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -322,10 +326,10 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:neocomplcache_enable_at_startup = 1
 let g:yankring_manual_clipboard_check = 1
 
-if version < 710
-	let did_UltiSnips_vim=1
-	let did_UltiSnips_vim_after=1
-endif
+"if version < 710
+"	let did_UltiSnips_vim=1
+"	let did_UltiSnips_vim_after=1
+"endif
 
 " Make Vim recognize xterm escape sequences for Page and Arrow
 " keys combined with modifiers such as Shift, Control, and Alt.

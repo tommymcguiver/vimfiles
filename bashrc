@@ -1,5 +1,7 @@
 # .bashrc
 
+umask -S u=rwx,g=rwx,o=rx >/dev/null
+
 #local bins to override search path
 if [ -d $HOME/bin ]; then
 	export PATH=$HOME/bin:$PATH
@@ -26,7 +28,7 @@ set -o vi
 export PAGER="less"
 
 #Adds readline functionality to node REPL
-if which -s node && which -s rlwrap; then
+if which node >/dev/null 2>/dev/null && which rlwrap >/dev/null 2>/dev/null; then
 	alias node='env NODE_NO_READLINE=1 rlwrap -p Green -S "node >>> " node'
 fi
 
@@ -47,7 +49,7 @@ alias opentcp="lsof -i TCP -c"
 alias opentcpuser="lsof -u $(whoami) -a -i TCP"
 alias ymd="date +'%Y-%m-%d %H:%M:%S'"
 
-if which -s rbenv; then
+if which rbenv >/dev/null 2>/dev/null; then
 	eval "$(rbenv init -)"
 fi
 
@@ -57,7 +59,7 @@ if [ "${IS_MAC}" = "yes" ]; then
 else
 
 	#if term is not 256 colors then force it god damn it! This is 2013
-	if !echo $TERM | grep -q 256; then
+	if ! echo $TERM | grep -q 256; then
 		export TERM=screen-256color
 	fi
 fi

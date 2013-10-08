@@ -4,7 +4,13 @@ umask -S u=rwx,g=rwx,o=rx >/dev/null
 
 #local bins to override search path
 if [ -d $HOME/bin ]; then
-	export PATH=$HOME/bin:$PATH
+	export PATH=/usr/local/bin:$HOME/bin:$PATH
+fi
+
+#If brew install php55
+if which brew >/dev/null && brew --prefix josegonzalez/php/php55 >/dev/null 2>/dev/null; then
+
+	export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
 fi
 
 export IS_MAC="$( if uname -a | grep -qi darwin; then echo 'yes'; else echo 'no'; fi)"

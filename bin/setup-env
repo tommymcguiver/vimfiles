@@ -2,7 +2,7 @@
 
 FILEDIR=$( cd $( dirname $0 )/..; pwd );
 
-if [ ! -L "${HOME}/.vim" ]; then
+if [ -e "${HOME}/.vim" ] && [ ! -L "${HOME}/.vim" ]; then
 	echo "ERROR: Need to delete ${HOME}/.vim dir first. i.e rm -rf ${HOME}/.vim";
 	exit 1;
 fi

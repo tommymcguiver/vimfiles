@@ -352,7 +352,8 @@ if $TERM =~ 'xterm' || $TERM =~ '256'
 endif
 
 if $IS_MAC =~ 'yes'
-	set guifont=Monaco
+	"set guifont=Monaco
+	set guifont=Source\ Code\ Pro\ Light\ for\ Powerline
 else
-	set guifont=Inconsolata-dz\ for\ Powerline
+	set guifont=Source\ Code\ Pro\ Light\ for\ Powerline
 endif

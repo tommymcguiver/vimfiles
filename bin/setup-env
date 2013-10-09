@@ -10,7 +10,7 @@ fi
 rm ${HOME}/.vim
 ln -s $FILEDIR ${HOME}/.vim 
 
-FILES="bashrc inputrc psqlrc vimrc tmux.conf gitconfig my.cnf"
+FILES="bashrc inputrc psqlrc vimrc tmux.conf gitconfig my.cnf borisrc"
 
 for i in $FILES; do 
 	rm -f ${HOME}/.$i

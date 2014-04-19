@@ -21,7 +21,7 @@ done
 #Install powerline fonts for pretty terminal action on iterm2. Don't forget to setup color and font in iterm else won't work.
 cp ~/.vim/powerline-fonts/*/*.odf ~/Library/Fonts
 
-FILES="bashrc inputrc psqlrc vimrc tmux.conf gitconfig my.cnf borisrc zpreztorc"
+FILES="bashrc inputrc psqlrc vimrc tmux.conf gitconfig my.cnf borisrc zpreztorc zshrc"
 
 for i in $FILES; do
 	rm -f ${HOME}/.$i

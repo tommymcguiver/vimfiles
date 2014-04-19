@@ -8,11 +8,19 @@ if [ -e "${HOME}/.vim" ] && [ ! -L "${HOME}/.vim" ]; then
 fi
 
 rm ${HOME}/.vim
-ln -s $FILEDIR ${HOME}/.vim 
+ln -s $FILEDIR ${HOME}/.vim
 
-FILES="bashrc inputrc psqlrc vimrc tmux.conf gitconfig my.cnf borisrc"
+#Setup prezto zsh repo
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
-for i in $FILES; do 
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+	  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
+FILES="bashrc inputrc psqlrc vimrc tmux.conf gitconfig my.cnf borisrc zpreztorc"
+
+for i in $FILES; do
 	rm -f ${HOME}/.$i
 	ln -s ${HOME}/.vim/$i ${HOME}/.$i;
 done

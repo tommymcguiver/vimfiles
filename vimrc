@@ -133,6 +133,7 @@ set laststatus=2
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
+autocmd filetype php setlocal keywordprg=pman
 
 "return '[\s]' if trailing white space is detected
 "return '' otherwise

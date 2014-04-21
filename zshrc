@@ -18,6 +18,9 @@ bindkey "^S" history-incremental-pattern-search-forward
 bindkey "^Xr" history-incremental-search-backward
 bindkey "^Xs" history-incremental-search-forward
 
+#Local environment setup
+. ~/.vim/common-environment
+
 #source ~/.zsh-autosuggestions/autosuggestions.zsh
 
 ## Enable autosuggestions automatically

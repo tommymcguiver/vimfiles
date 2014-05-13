@@ -25,6 +25,7 @@ alias grep="grep --color"
 alias tmux="tmux -u2"
 set -o vi
 export PAGER="less"
+export VISUAL=vim
 
 #Adds readline functionality to node REPL
 if which node >/dev/null 2>/dev/null && which rlwrap >/dev/null 2>/dev/null; then

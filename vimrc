@@ -2,6 +2,8 @@
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
+let g:tagbar_ctags_bin='~/bin/ctags'
+
 runtime bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 "activate pathogen

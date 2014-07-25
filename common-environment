@@ -8,12 +8,12 @@ if [ -d $HOME/bin ]; then
 fi
 
 #If brew install php55
-if which brew >/dev/null && brew --prefix josegonzalez/php/php55 >/dev/null 2>/dev/null; then
+if which brew >/dev/null 2>/dev/null && brew --prefix josegonzalez/php/php55 >/dev/null 2>/dev/null; then
 
 	export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
 fi
 
-if which go >/dev/null; then
+if which go >/dev/null 2>/dev/null; then
 	export PATH="$HOME/go/bin:$PATH"
 fi
 

@@ -2,10 +2,19 @@
 
 umask -S u=rwx,g=rwx,o=rx >/dev/null
 
+#for home brew search mods and local user installed overrides
+if [ -d $HOME/bin ]; then
+	export PATH=$HOME/bin:/usr/local/bin:$PATH
+fi
+
 #If brew install php55
 if which brew >/dev/null && brew --prefix josegonzalez/php/php55 >/dev/null 2>/dev/null; then
 
 	export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
+fi
+
+if which go >/dev/null; then
+	export PATH="$HOME/go/bin:$PATH"
 fi
 
 #ruby envirnoment manager.
@@ -14,10 +23,6 @@ if [ -x ${HOME}/.rvm/scripts/rvm ]; then
 	PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fi
 
-#local bins to override search path
-if [ -d $HOME/bin ]; then
-	export PATH=$HOME/bin:/usr/local/bin:$PATH
-fi
 
 export IS_MAC="$( if uname -a | grep -qi darwin; then echo 'yes'; else echo 'no'; fi)"
 
@@ -58,3 +63,8 @@ else
 		export TERM=screen-256color
 	fi
 fi
+
+export GOPATH=$HOME/go
+export DOCKER_HOST=tcp://127.0.0.1:2375
+
+alias esrun="docker run -d  -p 9200:9200 -p 9300:9300 --volumes-from es dockerfile/elasticsearch /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml"

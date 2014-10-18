@@ -2,11 +2,6 @@
 
 umask -S u=rwx,g=rwx,o=rx >/dev/null
 
-#for home brew search mods and local user installed overrides
-if [ -d $HOME/bin ]; then
-	export PATH=$HOME/bin:/usr/local/bin:$PATH
-fi
-
 #If brew install php55
 if which brew >/dev/null 2>/dev/null && brew --prefix josegonzalez/php/php55 >/dev/null 2>/dev/null; then
 
@@ -21,6 +16,11 @@ fi
 if [ -x ${HOME}/.rvm/scripts/rvm ]; then
 	source ${HOME}/.rvm/scripts/rvm
 	PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+fi
+
+#local bins to override search path
+if [ -d $HOME/bin ]; then
+	export PATH=$HOME/bin:$PATH
 fi
 
 
@@ -68,3 +68,10 @@ export GOPATH=$HOME/go
 export DOCKER_HOST=tcp://127.0.0.1:2375
 
 alias esrun="docker run -d  -p 9200:9200 -p 9300:9300 --volumes-from es dockerfile/elasticsearch /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml"
+
+#Always last line, override system binaries
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+#Hack because there is 2 path variables ???? WTF?
+PATH1="$PATH";
+unset PATH;
+PATH="$PATH1"

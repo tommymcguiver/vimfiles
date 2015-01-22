@@ -32,8 +32,6 @@ set hlsearch    "hilight searches by default
 set wrap        "dont wrap lines
 set linebreak   "wrap lines at convenient points
 
-set pastetoggle=<F10>
-
 if v:version >= 703
     "undo settings
     set undodir=~/.vim/undofiles
@@ -367,3 +365,7 @@ for c in range(char2nr('A'), char2nr('Z'))
   execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
   execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
 endfor
+
+nnoremap <F5> :set invpaste paste?<CR>
+set pastetoggle=<F5>
+set showmode

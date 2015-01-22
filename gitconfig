@@ -15,6 +15,10 @@
 	br = branch
 	st = status
 	stat = status
+
+	#Rebase with upstream
+	 r = !"git fetch && git rebase -i $( git upstream )"
+
 	#######Do some cool stuff
 	#Typo
 	amend = commit --amend
@@ -74,6 +78,8 @@
 	glf = log -G
 	gl = "!sh -c 'git log --grep='$1' --format=nice $2' -"
 	gl1 = "!sh -c 'git log --grep='$1' --oneline $2' -"
+
+	d = !git difftool --extcmd=icdiff -y
 
 	#What branch contains a following sha1.
 	contains = branch --contains

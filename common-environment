@@ -2,6 +2,11 @@
 
 umask -S u=rwx,g=rwx,o=rx >/dev/null
 
+#Specific shell variables.
+if [ -e ${HOME}/.shell_vars ]; then
+	. ${HOME}/.shell_vars;
+fi
+
 #If brew install php55
 if which brew >/dev/null 2>/dev/null && brew --prefix php55 >/dev/null 2>/dev/null; then
 
@@ -66,9 +71,9 @@ else
 fi
 
 export GOPATH=$HOME/go
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/kenm/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
+if which boot2docker >/dev/null ; then
+	$(boot2docker shellinit >/dev/null 2>/dev/null );
+fi
 
 alias esrun="docker run -d  -p 9200:9200 -p 9300:9300 --volumes-from es dockerfile/elasticsearch /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml"
 

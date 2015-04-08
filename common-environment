@@ -33,6 +33,7 @@ export IS_MAC="$( if uname -a | grep -qi darwin; then echo 'yes'; else echo 'no'
 
 alias grep="grep --color"
 alias tmux="tmux -u2"
+alias getcomposer="curl -sS https://getcomposer.org/installer | php"
 set -o vi
 export PAGER="less"
 export VISUAL=vim

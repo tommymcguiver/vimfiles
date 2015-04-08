@@ -1,0 +1,2 @@
+#!/bin/bash
+cat ~/.ssh/authorized_keys | ssh $@ 'mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys; chmod 0644 ~/.ssh/authorized_keys; chmod 700 ~/.ssh;'

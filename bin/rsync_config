@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for host in $*; do
+	read -p "Syncing /home/kenm/.vim to ${host}(n/Y)" YES_NO;
+	shopt -s nocasematch;
+	if echo $YES_NO | grep -iqE "y|yes"; then
+		rsync $RSYNC_OPTIONS -azv --delete ~/.vim/ kenm@${host}:/home/kenm/.vim/
+	fi
+done

@@ -1,0 +1,40 @@
+#!/bin/bash
+sudo iptables -nL --line-numbers -v | perl '-MTerm::ANSIColor qw( colored )' -lanE 'my ( $num, $pkts, $bytes,$target,$prot,$opt,$in,$out,$source,$
+destination ) = @F;
+
+sub choose_color{
+	my ( $value, $default_color ) = @_;
+
+	return colored( $value, $value == 0 ? "bright_black" : $default_color );
+}
+
+sub color_match{
+	my ( $value, @matches ) = @_;
+
+	my $color = ( map{ (values %{$_})[0] } grep { defined $_->{$value} } @matches )[0];
+
+	#Color everything else alignment wont work
+	$color = defined $color ? $color : "bright_black";
+
+	my $ret = colored( $value, $color );
+}
+
+printf(
+	qq(%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-30s) ."\n",
+	choose_color($num, "red"),
+	choose_color($pkts, "green"),
+	choose_color($bytes, "yellow"),
+	color_match($target, ( { "ACCEPT" => "green" }, { LOG => "bright_green" }, { "REJECT" => "bright_red"}, { INCOMING => "green" }, { OUTGOING => "bri
+ght_green" } ) ),
+	color_match($prot, ( { all => "blue" }, {tcp => "magenta"}, {icmp => "bright_magenta"}, { udp => "yellow" } ) ),
+	choose_color($opt, "yellow"),
+	choose_color($in, "red"),
+	choose_color($out, "green"),
+	choose_color($source, "yellow"),
+	choose_color($destination, "red"),
+) if ( $num ne "Chain" );
+
+if ( $num eq "Chain"){
+	printf( join( " ", @F ) .  "\n");
+}
+'

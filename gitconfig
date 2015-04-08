@@ -103,3 +103,5 @@
 [pretty]
 	nice = format:%C(blue)%h %C(green)(%ar) %C(bold black)%an - %C(reset)%s%C(yellow)%+d%C(reset)
 	longnice = format:%C(blue)%h %C(cyan)%ad %C(green)%ar %C(bold black)%an%C(reset)%C(yellow)%+d%n%C(reset)%s
+[push]
+	default = current

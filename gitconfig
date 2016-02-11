@@ -5,10 +5,6 @@
 	ui = true
 [core]
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab
-[diff]
-	tool = vimdiff
-[merge]
-	tool = vimdiff
 [alias]
 	#######Shorten stuff
 	co = checkout
@@ -17,7 +13,8 @@
 	stat = status
 
 	#Rebase with upstream
-	 r = !"git fetch && git rebase -i $( git upstream )"
+	r = !"git fetch && git rebase -i $( git upstream )"
+	ro = !"git reset origin/$(git this) --hard"
 
 	#######Do some cool stuff
 	#Typo
@@ -80,6 +77,8 @@
 	gl1 = "!sh -c 'git log --grep='$1' --oneline $2' -"
 
 	d = !git difftool --extcmd=icdiff -y
+	dl = !git difftool -t intellij develop...
+	di = !git difftool -t intellij
 
 	#What branch contains a following sha1.
 	contains = branch --contains
@@ -96,6 +95,9 @@
 	#Show stash
 	lstash = !"for i in $(git --no-pager stash list --format=\"%gd\"); do echo \"List stash: $i\"; git stash show $i; done"
 	sstash = !"for i in $(git --no-pager stash list --format=\"%gd\"); do echo \"List stash: $i\"; git --no-pager stash show -p $i; done"
+
+	#link upstream
+	up = !"git branch --set-upstream-to=origin/$(git this)  $(git this)"
 [grep]
 	#Make git grep play nice
 	extendRegexp = true
@@ -105,3 +107,9 @@
 	longnice = format:%C(blue)%h %C(cyan)%ad %C(green)%ar %C(bold black)%an%C(reset)%C(yellow)%+d%n%C(reset)%s
 [push]
 	default = current
+[merge]
+	tool = vimdiff
+[diff]
+   tool = intellij
+[difftool "intellij"]
+   cmd = '/Applications/IntelliJ IDEA 14.app/Contents/MacOS/idea' diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")

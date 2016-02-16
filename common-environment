@@ -62,7 +62,7 @@ fi
 if [ "${IS_MAC}" = "yes" ]; then
 	#Usefull alias's
 	export LC_ALL="en_AU.UTF-8"
-	export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home"
+	export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 else
 
 	#if term is not 256 colors then force it god damn it! This is 2013
